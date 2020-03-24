@@ -52,7 +52,57 @@ async def json_or_text(response: aiohttp.ClientResponse) -> Union[str, dict]:
 
 
 async def get_cosmetic(**params: Any):
-    """Search cosmetic function which can be used without creating HTTP client."""
+    """|coro|
+
+        Fetches first cosmetic matching parameters. All parameters are optional but at least 1 is required.
+
+        Parameters
+        ----------
+        backendRarity: Optional[:class:`str`]
+            The backend rarity of the cosmetic.
+        backendType: Optional[:class:`str`]
+            The backend type of the cosmetic.
+        description: Optional[:class:`str`]
+            The description of the cosmetic (this is based on your searchLang and your matchMethod).
+        hasFeaturedIcon: Optional[:class:`bool`]
+            Whether the cosmetic needs a featured icon.
+        hasIcon: Optional[:class:`bool`]
+            Whether the cosmetic needs a normal icon.
+        hasSeries: Optional[:class:`str`]
+            Whether the cosmetic needs to have a series.
+        hasVariants: Optional[:class:`str`]
+            Whether the cosmetic needs to have variants.
+        lang: Optional[:class:`str`]
+            The language code that should be used for **results**, defaults to 'en'.
+        matchMethod: Optional[:class:`str`]
+            The match method (full, contains, starts, ends) that should be used for filtering the files
+        name: Optional[:class:`str`]
+            The display name of the cosmetic (this is based on your searchLang and your matchMethod).
+        rarity: Optional[:class:`str`]
+            This is based on your searchLang and your matchMethod (this is based on your searchLang and your
+            matchMethod).
+        searchLang: Optional[:class:`str`]
+            The language code that should be used for searching, defaults to 'en'.
+        series: Optional[:class:`str`]
+            The series of the cosmetic (this is based on your searchLang and your matchMethod).
+        set: Optional[:class:`str`]
+            The set of the cosmetic (this is based on your searchLang and your matchMethod).
+        shortDescription: Optional[:class:`str`]
+            The short description of the cosmetic (this is based on your searchLang and your matchMethod).
+
+
+        Raises
+        ------
+        InvalidParameters
+            If none or more than 1 parameters are provided.
+        NotFound
+            If no playlists are found matching parameters.
+
+        Returns
+        -------
+        :class:`Playlist`:
+            Playlist object containing the playlists information.
+        """
     async with aiohttp.ClientSession() as session:
         async with session.request(method='GET', url=f'{BEN_BOT_BASE}/cosmetics/br/search', params=params) as r:
             data = await json_or_text(r)
