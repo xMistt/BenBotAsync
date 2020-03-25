@@ -69,4 +69,4 @@ async def event_friend_message(message):
 client.run()
 ```
 
-The list of functions is on the Wiki.
+You can check out the documentation for BenBotAsync [here](https://stoplight.io/p/docs/gh/xMistt/BenBotAsync).
