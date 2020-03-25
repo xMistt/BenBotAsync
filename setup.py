@@ -2,12 +2,6 @@ import setuptools
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
-
-extras_require = {
-    'docs': [
-        'sphinxcontrib_trio==1.1.0',
-    ]
-}
     
 setuptools.setup(
     name="BenBotAsync",
