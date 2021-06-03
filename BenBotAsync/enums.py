@@ -7,7 +7,7 @@ class BackendRarity(Enum):
     Epic = 'EFortRarity::Epic'
     Rare = 'EFortRarity::Rare'
     Uncommon = 'EFortRarity::Uncommon'
-    Common = 'EFortRarity::Uncommon'
+    Common = 'EFortRarity::Common'
 
 
 class BackendType(Enum):

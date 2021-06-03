@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
     
 setuptools.setup(
     name="BenBotAsync",
-    version="2.0.2",
+    version="3.0.0",
     author="xMistt",
     description="Asynchronous Python wrapper for BenBot API.",
     long_description=long_description,
@@ -18,6 +18,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-          'aiohttp',
-      ],
+        'aiohttp',
+    ],
 )

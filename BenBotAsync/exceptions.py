@@ -8,3 +8,7 @@ class InvalidParameters(BenBotException):
 
 class NotFound(BenBotException):
     pass
+
+
+class InvalidVersion(BenBotException):
+    pass

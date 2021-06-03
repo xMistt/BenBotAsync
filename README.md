@@ -6,7 +6,7 @@ Python wrapper for the BenBot API.
 [![BenBot Version: 1.0.1](https://img.shields.io/pypi/v/BenBotAsync.svg)](https://pypi.org/project/BenBotAsync/)
 
 ## Installing:
-### ~~Synchronous~~: **Deprecated for now.**
+### ~~Synchronous~~: **Deprecated, use the async version.**
 ~~Windows:~~ ``py -3 -m pip install BenBot``<br>
 ~~Linux/macOS:~~ ``python3 -m pip install BenBot``
 
@@ -18,6 +18,7 @@ Linux/macOS: ``python3 -m pip install BenBotAsync``
 ```
 import BenBotAsync
 import asyncio
+
 
 async def ben_search():
     result = await BenBotAsync.get_cosmetic(
@@ -31,7 +32,7 @@ async def ben_search():
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(ben_search())
-loop.close()
+
 ```
 
 This would output:<br>
@@ -42,6 +43,7 @@ fortnitepy example:
 import fortnitepy
 import BenBotAsync
 
+
 client = fortnitepy.Client(
     auth=fortnitepy.EmailAndPasswordAuth(
         email='example@email.com',
@@ -49,8 +51,9 @@ client = fortnitepy.Client(
     )
 )
 
+
 @client.event
-async def event_friend_message(message):
+async def event_friend_message(message: fortnitepy.FriendMessage) -> None:
     args = message.content.split()
     split = args[1:]
     content = " ".join(split)
@@ -66,7 +69,9 @@ async def event_friend_message(message):
 
         await client.user.party.me.set_outfit(asset=skin.id)
 
+
 client.run()
+
 ```
 
 You can check out the documentation for BenBotAsync [here](https://stoplight.io/p/docs/gh/xMistt/BenBotAsync).
