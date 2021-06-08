@@ -48,9 +48,9 @@ class BRCosmetic:
         self.name = data.get('name')
         self.description = data.get('description')
         self.short_description = data.get('shortDescription')
-        self.backend_type = BackendType(data.get('backendType'))
+        self.backend_type = BackendType(data.get('backendType')) if data.get('backendType') != None else None
         self.rarity = data.get('rarity')
-        self.backend_rarity = BackendRarity(data.get('backendRarity'))
+        self.backend_rarity = BackendRarity(data.get('backendRarity')) if data.get('backendRarity') != None else None
         self.set = data.get('set')
         self.set_text = data.get('setText')
         self.series = data.get('series')
