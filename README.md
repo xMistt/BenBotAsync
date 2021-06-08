@@ -15,7 +15,7 @@ Windows: ``py -3 -m pip install BenBotAsync``<br>
 Linux/macOS: ``python3 -m pip install BenBotAsync``
 
 ## Examples:
-```
+```py
 import BenBotAsync
 import asyncio
 
@@ -39,7 +39,7 @@ This would output:<br>
 ```CID_029_Athena_Commando_F_Halloween```
 
 fortnitepy example:
-```
+```py
 import fortnitepy
 import BenBotAsync
 
