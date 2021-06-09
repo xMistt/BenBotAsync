@@ -25,7 +25,7 @@ from typing import Tuple, Union, Any
 
 from .enums import *
 from .cosmetics import BRCosmetic
-from .exceptions import InvalidParameters, NotFound
+from .exceptions import InvalidParameters, NotFound, APIServerDown
 from .api import BenBot
 
 import aiohttp
@@ -39,13 +39,12 @@ import json
 import datetime
 
 __name__ = 'BenBotAsync'
-__version__ = '3.0.0'
+__version__ = '3.0.1'
 __author__ = 'xMistt'
 
 BEN_BOT_BASE = 'https://benbot.app/api/v1'
 
 
-# Credit to Terbau for this function.
 async def json_or_text(response: aiohttp.ClientResponse) -> Union[str, dict]:
     text = await response.text(encoding='utf-8')
     if 'application/json' in response.headers.get('content-type', ''):
@@ -110,9 +109,10 @@ async def get_cosmetic(**params: Any) -> BRCosmetic:
 
             if 'At least one search parameter is required' in str(data):
                 raise InvalidParameters('At least one valid search parameter is required.')
-
-            if 'Could not find any cosmetic matching parameters' in str(data):
+            elif 'Could not find any cosmetic matching parameters' in str(data):
                 raise NotFound('Could not find any cosmetic matching parameters.')
+            elif 'Api is currently updating' in str(data):
+                raise APIServerDown(data['error'])
 
             return BRCosmetic(data)
 
@@ -174,9 +174,10 @@ async def get_cosmetics(**params: Any) -> list:
 
             if 'At least one search parameter is required' in str(data):
                 raise InvalidParameters('At least one valid search parameter is required.')
-
-            if 'Could not find any cosmetic matching parameters' in str(data):
+            elif 'Could not find any cosmetic matching parameters' in str(data):
                 raise NotFound('Could not find any cosmetic matching parameters.')
+            elif 'Api is currently updating' in str(data):
+                raise APIServerDown(data['error'])
 
             return [BRCosmetic(cosmetic) for cosmetic in data]
 
@@ -208,5 +209,7 @@ async def get_cosmetic_from_id(cosmetic_id: str) -> BRCosmetic:
 
             if 'Invalid ID' in str(data):
                 raise NotFound('Invalid ID.')
+            elif 'Api is currently updating' in str(data):
+                raise APIServerDown(data['error'])
 
             return BRCosmetic(data)

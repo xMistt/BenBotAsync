@@ -1,5 +1,5 @@
 from .http import HTTPClient
-from .exceptions import InvalidVersion
+from .exceptions import InvalidVersion, APIServerDown
 from .aes import FortniteAES
 from .cosmetics import FortniteCosmetics
 
@@ -36,6 +36,8 @@ class BenBot:
 
         if "Invalid version" in str(data):
             raise InvalidVersion(data['error'])
+        elif "Api is currently updating" in str(data):
+            raise APIServerDown(data['error'])
 
         return data
 
@@ -54,6 +56,8 @@ class BenBot:
         InvalidVersion
             If you passed a version and this version was invalid.
 
+
+
         Returns
         -------
         :class:`FortniteAES`:
@@ -63,6 +67,8 @@ class BenBot:
 
         if "Invalid version" in str(data):
             raise InvalidVersion(data['error'])
+        elif "Api is currently updating" in str(data):
+            raise APIServerDown(data['error'])
 
         return FortniteAES(data)
 

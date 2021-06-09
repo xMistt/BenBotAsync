@@ -12,3 +12,7 @@ class NotFound(BenBotException):
 
 class InvalidVersion(BenBotException):
     pass
+
+
+class APIServerDown(BenBotException):
+    pass
