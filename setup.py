@@ -1,11 +1,16 @@
 import setuptools
 
+name = 'BenBotAsync'
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
-    
+
+with open(f'{name}/__init__.py', encoding="utf8") as f:
+    version = f.read().split("__version__ = '")[1].split("'")[0]
+
 setuptools.setup(
-    name="BenBotAsync",
-    version="3.0.0",
+    name=name,
+    version=version,
     author="xMistt",
     description="Asynchronous Python wrapper for BenBot API.",
     long_description=long_description,
